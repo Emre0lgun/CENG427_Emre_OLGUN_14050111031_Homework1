@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     Button rightButton;
     Button leftButton;
     Button startButton;
+    TextView endgame;
     TextView highScoreText;
     int correctNumber;
     int level = 1;
@@ -28,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
         rightButton = (Button) findViewById(R.id.rightBtn);
         leftButton = (Button) findViewById(R.id.leftBtn);
         startButton = (Button) findViewById(R.id.startBtn);
+        endgame = (TextView) findViewById(R.id.endgame);
         highScoreText = (TextView) findViewById(R.id.highScore);
         rightButton.setOnClickListener(answerButtonClick);
         leftButton.setOnClickListener(answerButtonClick);
         startButton.setOnClickListener(startButtonClick);
         highScoreText.setText(Integer.toString(highScore));
+        endgame.setVisibility(View.GONE);
     }
 
     public View.OnClickListener startButtonClick = new View.OnClickListener() {
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             rightButton.setEnabled(true);
             leftButton.setEnabled(true);
             v.setVisibility(View.GONE);
+            endgame.setVisibility(View.GONE);
             initializeNumbers();
         }
     };
@@ -141,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         leftButton.setEnabled(false);
         rightButton.setEnabled(false);
         startButton.setVisibility(View.VISIBLE);
+        endgame.setVisibility(View.VISIBLE);
         if(trueAnswerCount > highScore){
             sharedPreferences.edit().putInt("highScore",trueAnswerCount).apply();
             highScoreText.setText(Integer.toString(trueAnswerCount));
